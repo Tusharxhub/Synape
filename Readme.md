@@ -1,2 +1,3 @@
-Abhi tak kuch start nahi hua hai. 29th May ko end sem khatam hoga, uske baad asli kaam shuru hoga.  
-Jo bana raha hoon na, woh ekdum tabar tod cheez hone wali hai.
+Abhi repo bhi properly start nahi hua aur log stack suggest karne lag gaye 😂
+29th May ke baad actual build phase start hoga.
+Aur jo banne wala hai… woh seedha tabar tod niklega
