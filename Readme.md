@@ -1,280 +1,361 @@
-# SYNAPSE
-## Real-Time Software Intelligence Engine
 
-SYNAPSE is a native software intelligence engine that analyzes, visualizes, and explains software systems in real time.  
-It transforms a codebase into an interactive visual structure, allowing developers to understand architecture, dependencies, runtime behavior, technical debt, and project evolution through a living, cinematic engineering interface.
+<div align="center">
 
-SYNAPSE is not just a dashboard.  
-It is a new way to explore software systems.
+# 🧬 SYNAPSE
 
----
+### Real-Time Software Intelligence Engine
 
-## Project Vision
 
-Modern software systems are complex.  
-Developers often depend on logs, folder structures, static diagrams, terminal outputs, and scattered documentation to understand how a system works.
 
-SYNAPSE makes this invisible complexity visible.
 
-The goal of SYNAPSE is to help developers see software as a living system.
+<p>
+  SYNAPSE is a native software intelligence engine that transforms codebases into living, interactive, real-time architecture systems.
+</p>
 
-It analyzes:
-- Project architecture
-- File and folder relationships
-- Module dependencies
-- API flows
-- Runtime behavior
-- System performance
-- Git evolution
-- Technical debt
-- Engineering risks
+<p>
+  It does not just analyze software.  
+  It lets you <b>see software breathe, evolve, mutate, and communicate.</b>
+</p>
 
-Then it converts that data into real-time interactive visualizations.
+<br />
+
+![Status](https://img.shields.io/badge/status-active_development-7c3aed?style=for-the-badge)
+![Built With](https://img.shields.io/badge/built_with-rust_+_react_+_python-06b6d4?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-linux_native-111827?style=for-the-badge)
+![Vision](https://img.shields.io/badge/vision-engineering_visualized-22c55e?style=for-the-badge)
+
+</div>
 
 ---
 
-## Core Idea
+## 🧠 What Is SYNAPSE?
 
-SYNAPSE treats a software project like a living organism.
+SYNAPSE is a **native desktop software intelligence engine** designed to help developers understand complex software systems through real-time visual analysis.
 
-| Software Concept        | SYNAPSE Interpretation    |
-|-------------------------|---------------------------|
-| Dependencies            | Neural connections        |
-| Modules                 | Functional regions        |
-| APIs                    | Communication pathways    |
-| Technical debt          | Structural mutation       |
-| Bugs                    | System infection          |
-| Runtime spikes          | Stress signals            |
-| Dead code               | Inactive tissue           |
-| Circular dependencies   | Corrupted pathways        |
-| Git history             | Evolution timeline        |
+Modern software is invisible.
 
-This makes complex software easier to understand, explain, debug, and improve.
+You cannot see:
+- how modules depend on each other
+- where technical debt spreads
+- how architecture changes over time
+- which files act like system bottlenecks
+- how runtime behavior connects with code structure
+- how a project slowly becomes unstable
 
----
+SYNAPSE makes all of that visible.
 
-## Why SYNAPSE?
-
-Most developer tools show information in a static way.
-
-SYNAPSE focuses on:
-- Real-time understanding
-- Interactive architecture exploration
-- Visual engineering intelligence
-- AI-assisted analysis
-- Runtime awareness
-- System evolution tracking
-
-It is designed for developers who want to understand not only what the code does, but how the system behaves.
+It converts a codebase into a living engineering organism.
 
 ---
 
-## Key Features
+## ⚡ The Core Philosophy
+
+Most tools show software like this:
+
+```txt
+files
+folders
+logs
+graphs
+terminal output
+````
+
+SYNAPSE shows software like this:
+
+```txt
+neural pathways
+dependency DNA
+runtime pulses
+architecture mutations
+system stress signals
+evolution timelines
+```
+
+This is not a normal dashboard.
+
+This is an engineering cockpit.
+
+---
+
+## 🧬 Software As A Living Organism
+
+SYNAPSE treats every software project like a biological system.
+
+| Software Reality      | SYNAPSE Visualization  |
+| --------------------- | ---------------------- |
+| Dependencies          | Neural connections     |
+| Modules               | Functional regions     |
+| APIs                  | Communication pathways |
+| Technical debt        | Structural mutation    |
+| Bugs                  | System infection       |
+| Runtime spikes        | Stress response        |
+| Dead code             | Inactive tissue        |
+| Circular dependencies | Corrupted pathways     |
+| Git history           | Evolution timeline     |
+| Docker containers     | Isolated organs        |
+| System processes      | Active life signals    |
+
+The goal is simple:
+
+> Help developers understand how software behaves, not just how it is written.
+
+---
+
+## 🚀 Why SYNAPSE Exists
+
+Developers spend too much time trying to understand systems through scattered information.
+
+They switch between:
+
+* terminal
+* logs
+* code editor
+* package files
+* architecture docs
+* Docker tools
+* Git history
+* monitoring dashboards
+* AI chats
+
+SYNAPSE brings these signals into one visual intelligence layer.
+
+It helps answer questions like:
+
+* What does this project actually look like internally?
+* Which files are most connected?
+* Which modules are risky?
+* Where is technical debt forming?
+* How has the architecture evolved?
+* Which dependencies are becoming dangerous?
+* What happens when the system runs?
+
+---
+
+## ✨ Key Features
 
 ### 1. Project Scanner
 
-SYNAPSE scans a local project and extracts useful structural information.
+SYNAPSE scans a local project and extracts its internal structure.
 
-It analyzes:
-- Folder structure
-- Source files
-- Imports and exports
-- Package dependencies
-- Configuration files
-- API routes
-- Components
-- Services
-- Database-related files
+It reads:
 
-The scanner creates the foundation for the visualization and intelligence engine.
+* folders
+* files
+* imports
+* exports
+* dependencies
+* config files
+* API routes
+* components
+* services
+* database-related files
+
+The scanner becomes the foundation of the intelligence engine.
 
 ---
 
 ### 2. Architecture Visualization
 
-SYNAPSE converts project structure into an interactive architecture graph.
+SYNAPSE converts the codebase into an interactive architecture graph.
 
-The visualization shows:
-- File relationships
-- Module connections
-- Component hierarchy
-- Service boundaries
-- API communication
-- Dependency chains
+You can explore:
 
-This helps developers quickly understand how a project is organized.
+* file relationships
+* module connections
+* component hierarchy
+* service boundaries
+* API communication
+* dependency chains
+* risky nodes
+* overloaded modules
+
+The goal is to make architecture understandable in seconds.
 
 ---
 
-### 3. Dependency Intelligence
+### 3. Dependency DNA
 
-SYNAPSE identifies how different parts of a project depend on each other.
+SYNAPSE visualizes dependencies like DNA chains.
 
-It can detect:
-- Circular dependencies
-- Over-coupled modules
-- Unused dependencies
-- Heavy packages
-- Risky dependency chains
-- Poor separation of concerns
+It can reveal:
 
-These problems are shown visually so developers can understand them faster.
+* circular dependencies
+* over-coupled modules
+* unused dependencies
+* heavy packages
+* risky dependency paths
+* poor separation of concerns
+
+Bad architecture becomes visible as mutation.
 
 ---
 
 ### 4. Runtime Observatory
 
-SYNAPSE monitors runtime behavior while the project is running.
+SYNAPSE watches the system while it runs.
 
-It can track:
-- CPU usage
-- Memory usage
-- Active processes
-- Network activity
-- Application performance
-- Docker container status
-- Resource spikes
+It tracks:
 
-The goal is to connect code structure with real system behavior.
+* CPU usage
+* memory usage
+* active processes
+* network activity
+* runtime spikes
+* Docker containers
+* application stress signals
+
+This connects static code structure with live system behavior.
 
 ---
 
 ### 5. Evolution Engine
 
-SYNAPSE analyzes Git history to understand how a project evolved over time.
+SYNAPSE analyzes Git history to understand how the project changed over time.
 
 It can show:
-- Which files changed most frequently
-- Which modules became more complex
-- How dependencies increased
-- Where technical debt started spreading
-- How architecture changed across commits
 
-This helps developers understand the long-term health of a codebase.
+* frequently changed files
+* unstable modules
+* growing complexity
+* dependency expansion
+* technical debt spread
+* architecture drift
+
+This turns Git history into an evolution timeline.
 
 ---
 
 ### 6. AI Insight Layer
 
-SYNAPSE uses AI to explain engineering problems in simple language.
+SYNAPSE uses AI to explain engineering problems clearly.
 
 It can generate:
-- Architecture summaries
-- Codebase health reports
-- Optimization suggestions
-- Technical debt explanations
-- Scalability warnings
-- Refactoring recommendations
 
-AI is not the main product.  
-AI supports the intelligence engine.
+* architecture summaries
+* codebase health reports
+* optimization ideas
+* scalability warnings
+* refactoring suggestions
+* technical debt explanations
 
----
+AI is not the product.
 
-## MVP Scope
-
-The first version of SYNAPSE focuses on building the core foundation.
-
-### MVP v0.1 Includes
-- Native desktop application
-- Project import system
-- File system scanner
-- Basic dependency parser
-- Interactive architecture graph
-- Project summary panel
-- Basic health score
-- Clean futuristic UI
-
-### MVP v0.1 Does Not Include Yet
-- Full AI automation
-- Advanced eBPF tracing
-- Deep runtime profiling
-- Multi-language support
-- Cloud sync
-- Team collaboration
-
-These can be added later as the system matures.
+AI is the intelligence layer behind the system.
 
 ---
 
-## Tech Stack
+## 🛰️ MVP v0.1 Scope
 
-### Desktop Layer
-- Tauri
-- Rust
+The first version focuses on the core foundation.
 
-Used for native desktop performance, filesystem access, and system-level integration.
+### Included In MVP v0.1
+
+* Native desktop app
+* Project import system
+* File system scanner
+* Basic dependency parser
+* Interactive architecture graph
+* Project summary panel
+* Basic health score
+* Futuristic visual interface
+
+### Not Included Yet
+
+* Full AI automation
+* Advanced eBPF tracing
+* Deep runtime profiling
+* Multi-language support
+* Cloud sync
+* Team collaboration
+
+These belong in future phases.
+
+---
+
+## 🛠️ Tech Stack
+
+### Native Desktop
+
+* Tauri
+* Rust
+
+Used for filesystem access, native performance, and system integration.
 
 ### Frontend
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- React Flow
-- Three.js / React Three Fiber
-- D3.js
 
-Used for building the interactive and cinematic visual interface.
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+* React Flow
+* Three.js
+* React Three Fiber
+* D3.js
+
+Used for the cinematic visual interface.
 
 ### Intelligence Engine
-- Python
-- FastAPI
-- Tree-sitter
-- AST parsing
 
-Used for codebase analysis, dependency extraction, and architecture intelligence.
+* Python
+* FastAPI
+* Tree-sitter
+* AST parsing
+
+Used for static analysis and architecture intelligence.
 
 ### Runtime Layer
-- WebSockets
-- Docker API
-- Linux system APIs
-- Process monitoring
 
-Used for real-time system and application monitoring.
+* WebSockets
+* Docker API
+* Linux system APIs
+* Process monitoring
+
+Used for real-time system signals.
 
 ### AI Layer
-- Ollama
-- Local LLMs
-- OpenAI-compatible APIs
-- RAG-based project understanding
 
-Used for AI-generated insights and engineering reports.
+* Ollama
+* Local LLMs
+* OpenAI-compatible APIs
+* RAG-based project understanding
+
+Used for intelligent explanations and engineering reports.
 
 ---
 
-## System Architecture
+## 🧩 System Architecture
 
 ```txt
-┌─────────────────────────────────────┐
-│              Frontend UI             │
-│ React + Tailwind + Motion + Graph UI │
-└──────────────────┬──────────────────┘
-                   │
-                   │ Events / Commands
-                   ▼
-┌─────────────────────────────────────┐
-│             Tauri Core               │
-│          Rust Native Backend         │
-└──────────────────┬──────────────────┘
-                   │
-        ┌──────────┴──────────┐
-        ▼                     ▼
-┌─────────────────┐   ┌────────────────────┐
-│ Analysis Engine │   │  Runtime Monitor    │
-│ Python + AST    │   │ System + Docker API │
-└─────────────────┘   └────────────────────┘
-        │                     │
-        └──────────┬──────────┘
-                   ▼
-┌─────────────────────────────────────┐
-│          Visualization Engine         │
-│  Graphs + Timelines + Live Signals   │
-└─────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│              SYNAPSE FRONTEND             │
+│  React + Tailwind + Motion + Graph Engine │
+└─────────────────────┬────────────────────┘
+                      │
+                      │ Commands / Events
+                      ▼
+┌──────────────────────────────────────────┐
+│               TAURI CORE                  │
+│           Rust Native Backend             │
+└─────────────────────┬────────────────────┘
+                      │
+        ┌─────────────┴─────────────┐
+        ▼                           ▼
+┌─────────────────────┐   ┌────────────────────────┐
+│  Analysis Engine     │   │    Runtime Monitor      │
+│  Python + AST        │   │ Linux + Docker Signals  │
+└─────────────────────┘   └────────────────────────┘
+        │                           │
+        └─────────────┬─────────────┘
+                      ▼
+┌──────────────────────────────────────────┐
+│          Visualization Engine             │
+│ Graphs + DNA Chains + Runtime Signals     │
+└──────────────────────────────────────────┘
 ```
 
 ---
 
-## Suggested Folder Structure
+## 📁 Folder Structure
 
 ```txt
 synapse/
@@ -319,9 +400,9 @@ synapse/
 
 ---
 
-## How SYNAPSE Works
+## 🔬 How SYNAPSE Works
 
-### Step 1: Import Project
+### Step 1: Import A Project
 
 The user selects a local project folder.
 
@@ -329,22 +410,21 @@ The user selects a local project folder.
 /home/user/projects/my-app
 ```
 
-SYNAPSE receives the project path and starts scanning.
+SYNAPSE starts scanning the project.
 
 ---
 
-### Step 2: Scan Structure
+### Step 2: Extract Structure
 
 The scanner reads:
-- Files
-- Folders
-- Package files
-- Source code
-- Imports
-- Exports
-- Config files
 
-It creates a structured representation of the project.
+* files
+* folders
+* package files
+* source code
+* imports
+* exports
+* config files
 
 Example output:
 
@@ -361,11 +441,9 @@ Example output:
 
 ---
 
-### Step 3: Build Graph
+### Step 3: Build The Architecture Graph
 
-SYNAPSE converts the scanned data into graph nodes and edges.
-
-Example:
+SYNAPSE converts scanned data into graph nodes and edges.
 
 ```json
 {
@@ -388,24 +466,25 @@ Example:
 
 ---
 
-### Step 4: Visualize Architecture
+### Step 4: Visualize The System
 
-The frontend renders the project as an interactive graph.
+The frontend renders the system as an interactive engineering map.
 
 Users can:
-- Zoom
-- Pan
-- Click nodes
-- Inspect files
-- View dependencies
-- Highlight risky modules
-- Explore architecture layers
+
+* zoom
+* pan
+* inspect nodes
+* highlight dependencies
+* detect risky modules
+* view architecture layers
+* explore the codebase visually
 
 ---
 
-### Step 5: Generate Insights
+### Step 5: Generate Intelligence
 
-The intelligence engine analyzes the graph and produces insights.
+SYNAPSE analyzes the graph and produces insight.
 
 Example:
 
@@ -417,114 +496,70 @@ Consider introducing feature-based modules.
 
 ---
 
-## UI Direction
+## 🎨 UI Direction
 
-SYNAPSE should feel like a futuristic engineering cockpit.
+SYNAPSE should feel like:
 
-### Design Style
-- Dark interface
-- Neon accents
-- Smooth motion
-- Tactical panels
-- Graph-based layouts
-- Layered depth
-- Minimal but powerful typography
+```txt
+a neural control room
+a cybernetic engineering cockpit
+a living system observatory
+a software MRI scanner
+```
 
-### UI Sections
-- Project Overview
-- Architecture Graph
-- Dependency DNA
-- Runtime Observatory
-- Evolution Timeline
-- AI Insight Panel
-- System Health Score
+### Visual Style
 
----
+* dark graphite interface
+* neon violet and cyan highlights
+* animated graph systems
+* glowing node networks
+* floating tactical panels
+* smooth cinematic transitions
+* layered depth
+* terminal-inspired details
+* data streams
+* neural motion language
 
-## Roadmap
+### Main UI Sections
 
-### Phase 1: Foundation
-- Setup Tauri desktop app
-- Setup React + TypeScript frontend
-- Build project import system
-- Build file scanner
-- Render basic graph visualization
-
-### Phase 2: Intelligence
-- Add dependency parser
-- Detect framework type
-- Analyze imports and exports
-- Generate architecture summary
-- Add basic health scoring
-
-### Phase 3: Visualization
-- Add advanced graph animations
-- Add dependency DNA view
-- Add module risk highlighting
-- Add project overview dashboard
-
-### Phase 4: Runtime Monitoring
-- Add CPU and memory tracking
-- Add process monitoring
-- Add Docker container monitoring
-- Stream runtime events through WebSockets
-
-### Phase 5: Evolution Engine
-- Read Git history
-- Track file change frequency
-- Detect complexity growth
-- Visualize project evolution timeline
-
-### Phase 6: AI Insight Layer
-- Add local AI model support
-- Generate architecture reports
-- Suggest refactoring improvements
-- Explain technical debt
-- Generate project health summary
+* Project Overview
+* Architecture Graph
+* Dependency DNA
+* Runtime Observatory
+* Evolution Timeline
+* AI Insight Panel
+* System Health Score
 
 ---
 
-## Future Scope
+## 🧪 npm Setup
 
-Future versions of SYNAPSE can include:
-- eBPF-based runtime tracing
-- Multi-language support
-- VS Code extension
-- GitHub repository import
-- Team collaboration
-- Plugin system
-- Cloud architecture analysis
-- Security vulnerability mapping
-- Performance profiling
-- CI/CD pipeline visualization
-- AI-powered refactoring planner
-
----
-
-## Installation
-
-> Installation instructions will be added after the initial project setup.
-
-Expected setup:
+### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/synapse.git
+git clone https://github.com/Tusharxhub/synapse.git
 cd synapse
 ```
 
-Install dependencies:
+### Install Dependencies
 
 ```bash
-pnpm install
+npm install
 ```
 
-Run desktop app:
+### Run Desktop App
 
 ```bash
-pnpm tauri dev
+npm run tauri dev
 ```
 
-Run analysis engine:
+### Run Frontend Only
+
+```bash
+npm run dev
+```
+
+### Run Analysis Engine
 
 ```bash
 cd apps/analysis-engine
@@ -536,60 +571,139 @@ uvicorn main:app --reload --port 8000
 
 ---
 
-## Development Goals
+## 📜 Recommended npm Scripts
 
-The main development goals of SYNAPSE are:
-- Build a clean native desktop experience
-- Make software architecture visually understandable
-- Connect static analysis with runtime behavior
-- Use AI as an explanation layer, not as a gimmick
-- Create a project that demonstrates real engineering depth
+Add these scripts to your root `package.json`.
 
----
-
-## What Makes SYNAPSE Different
-
-SYNAPSE is different because it does not only help developers write code.  
-It helps developers understand software systems.
-
-That makes it useful for:
-- Students
-- Developers
-- Open-source maintainers
-- Software architects
-- DevOps engineers
-- Engineering teams
+```json
+{
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/desktop",
+    "build": "npm run build --workspace=apps/desktop",
+    "preview": "npm run preview --workspace=apps/desktop",
+    "tauri": "npm run tauri --workspace=apps/desktop",
+    "tauri:dev": "npm run tauri dev --workspace=apps/desktop",
+    "tauri:build": "npm run tauri build --workspace=apps/desktop",
+    "analysis:dev": "cd apps/analysis-engine && uvicorn main:app --reload --port 8000",
+    "lint": "npm run lint --workspaces",
+    "format": "prettier --write ."
+  }
+}
+```
 
 ---
 
-### Author
+## 🗺️ Roadmap
+
+### Phase 1: Foundation
+
+* Setup Tauri desktop app
+* Setup React + TypeScript frontend
+* Build project import system
+* Build file scanner
+* Render basic graph visualization
+
+### Phase 2: Intelligence
+
+* Add dependency parser
+* Detect framework type
+* Analyze imports and exports
+* Generate architecture summary
+* Add basic health scoring
+
+### Phase 3: Visualization
+
+* Add graph animations
+* Add dependency DNA view
+* Add module risk highlighting
+* Add project overview dashboard
+
+### Phase 4: Runtime Monitoring
+
+* Add CPU and memory tracking
+* Add process monitoring
+* Add Docker container monitoring
+* Stream runtime events through WebSockets
+
+### Phase 5: Evolution Engine
+
+* Read Git history
+* Track file change frequency
+* Detect complexity growth
+* Visualize project evolution timeline
+
+### Phase 6: AI Insight Layer
+
+* Add local AI model support
+* Generate architecture reports
+* Suggest refactoring improvements
+* Explain technical debt
+* Generate project health summary
+
+---
+
+## 🧠 Future Scope
+
+Future versions of SYNAPSE may include:
+
+* eBPF-based runtime tracing
+* VS Code extension
+* GitHub repository import
+* multi-language support
+* team collaboration
+* plugin system
+* security vulnerability mapping
+* performance profiling
+* CI/CD pipeline visualization
+* AI-powered refactoring planner
+* cloud architecture intelligence
+
+---
+
+## 🎯 Development Goals
+
+SYNAPSE is being built with these goals:
+
+* Make software architecture visually understandable
+* Build a clean native desktop experience
+* Connect static analysis with runtime behavior
+* Use AI as an explanation layer, not a gimmick
+* Explore real engineering beyond normal web apps
+* Create a project that feels research-grade and product-grade
+
+---
+
+## 🧑‍💻 Author
 
 Built by **Tushar Kanti Dey**
 
-A software engineering student exploring AI, systems visualization, developer tooling, and futuristic human-computer interaction.
+A software engineering student exploring AI, systems visualization, developer tooling, runtime intelligence, and futuristic human-computer interaction.
 
-Portfolio: [https://www.tushardevx01.tech](https://www.tushardevx01.tech)
----
-
-## Contact
-
- [Email](mailto:thetushardev0@gmail.com)  
- [Instagram](https://www.instagram.com/tushardevx01/)
+🌐 Portfolio: [https://www.tushardevx01.tech](https://www.tushardevx01.tech)
 
 ---
 
-## License
+## 🔗 Connect
 
-This project is currently under active development.  
+📧 Email: [thetushardev0@gmail.com](mailto:thetushardev0@gmail.com)
+📸 Instagram: [tushardevx01](https://www.instagram.com/tushardevx01/)
+
+---
+
+## 📄 License
+
+This project is currently under active development.
+
 License details will be added soon.
 
 ---
 
-## Final Note
+<div align="center">
 
-SYNAPSE is not just a final-year project.  
-It is an exploration of how software systems can be seen, understood, and experienced.
+## 🧬 Final Mission
 
-The mission is simple:
+```txt
+SYNAPSE is not just a final-year project.
 
-> Make invisible engineering visible.
+It is an attempt to rethink how developers experience software systems.
+```
