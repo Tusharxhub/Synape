@@ -1,0 +1,61 @@
+name: Release Windows Build
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  windows-release:
+    name: Build Windows Installer and upload
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: |
+          npm ci --unsafe-perm
+
+      - name: Build frontend + tauri bundle (Windows)
+        run: |
+          npm run build
+          cd src-tauri
+          # Build Tauri app for Windows (installer created under target/release/bundle)
+          cargo +stable build --release
+          ../node_modules/.bin/tauri build
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows installer(s)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./src-tauri/target/release/bundle/windows/*
+          asset_name: windows-artifacts-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
+
+      - name: List bundle output (for logs)
+        run: dir src-tauri\target\release\bundle || true
