@@ -3,11 +3,11 @@ import type { ArchitectureGraph, ArchitectureNode, ArchitectureEdge } from "@/ty
 
 /// Edge color mapping by type
 const EDGE_COLORS: Record<string, string> = {
-  contains: "#7dd3fc",
-  imports: "#00d9ff",
-  depends_on: "#a855f7",
-  configures: "#fbbf24",
-  dockerizes: "#38bdf8",
+  contains: "#64748b",
+  imports: "#22d3ee",
+  depends_on: "#38bdf8",
+  configures: "#f59e0b",
+  dockerizes: "#0ea5e9",
 };
 
 /// Convert architecture graph data into React Flow nodes and edges
@@ -72,13 +72,13 @@ function mapEdge(edge: ArchitectureEdge): Edge {
     id: edge.id,
     source: edge.source,
     target: edge.target,
-    animated: edge.edgeType === "depends_on" || edge.edgeType === "dockerizes",
+    animated: false,
     type: "smoothstep",
     markerEnd: { type: "arrowclosed" as any, color },
     style: {
       stroke: color,
-      strokeWidth: edge.edgeType === "depends_on" ? 1.5 : 2,
-      opacity: edge.edgeType === "depends_on" ? 0.5 : 0.7,
+      strokeWidth: edge.edgeType === "contains" ? 1.4 : 1.8,
+      opacity: edge.edgeType === "contains" ? 0.46 : 0.62,
     },
   };
 }

@@ -1,41 +1,30 @@
 import { ReactNode } from "react";
 
 interface AppShellProps {
+  commandBar: ReactNode;
   sidebar: ReactNode;
   canvas: ReactNode;
-  inspector: ReactNode;
 }
 
-export function AppShell({ sidebar, canvas, inspector }: AppShellProps) {
+export function AppShell({ commandBar, sidebar, canvas }: AppShellProps) {
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-synapse-darker text-white">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,217,255,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.1),transparent_30%)]" />
-      <div className="absolute inset-0 synapse-grid opacity-50" />
+    <div className="relative h-screen w-screen overflow-hidden bg-synapse-bg text-synapse-text">
+      <div className="pointer-events-none absolute inset-0 synapse-depth" />
 
-      {/* Scanline effect */}
-      <div className="pointer-events-none absolute inset-0 z-50 opacity-[0.02]"
-        style={{
-          backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)",
-        }}
-      />
+      <div className="relative z-10 flex h-full flex-col">
+        <header className="shrink-0 border-b border-synapse-border">
+          {commandBar}
+        </header>
 
-      {/* Layout */}
-      <div className="relative z-10 flex h-full">
-        {/* Left Sidebar */}
-        <aside className="w-[300px] flex-shrink-0 border-r border-white/[0.04] bg-white/[0.01] backdrop-blur-2xl overflow-hidden">
+        <div className="flex min-h-0 flex-1">
+          <aside className="w-[320px] shrink-0 border-r border-synapse-border bg-synapse-panel/80 backdrop-blur-md xl:w-[336px]">
           {sidebar}
-        </aside>
+          </aside>
 
-        {/* Center Canvas */}
-        <main className="relative flex-1 min-w-0 overflow-hidden">
-          {canvas}
-        </main>
-
-        {/* Right Inspector */}
-        <aside className="w-[320px] flex-shrink-0 border-l border-white/[0.04] bg-white/[0.01] backdrop-blur-2xl overflow-hidden">
-          {inspector}
-        </aside>
+          <main className="relative min-w-0 flex-1 overflow-hidden bg-synapse-surface/55">
+            {canvas}
+          </main>
+        </div>
       </div>
     </div>
   );

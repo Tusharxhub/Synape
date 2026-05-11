@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { AppShell } from "@/components/layout/AppShell";
+import { CommandBar } from "@/components/layout/CommandBar";
 import { ArchitectureCanvas } from "@/components/graph/ArchitectureCanvas";
 import { ProjectOverview } from "@/components/panels/ProjectOverview";
-import { InspectorPanel } from "@/components/panels/InspectorPanel";
+import { ContextualInspector } from "@/components/panels/ContextualInspector";
 import { DockerPanel } from "@/components/panels/DockerPanel";
 import { DependencyPanel } from "@/components/panels/DependencyPanel";
 import { useProjectImport } from "@/hooks/useProjectImport";
@@ -20,6 +21,14 @@ function App() {
       className="w-screen h-screen overflow-hidden"
     >
       <AppShell
+        commandBar={
+          <CommandBar
+            projectName={scanResult?.projectName}
+            isLoading={isLoading}
+            hasProject={Boolean(scanResult)}
+            onImportProject={importProject}
+          />
+        }
         sidebar={
           <div className="flex h-full flex-col overflow-hidden">
             <ProjectOverview
@@ -29,9 +38,8 @@ function App() {
               onImportProject={importProject}
               onClearError={clearError}
             />
-            {/* Docker & Dependency panels at bottom of sidebar */}
             {scanResult && (
-              <div className="border-t border-white/[0.04] px-4 py-3 space-y-3 overflow-y-auto max-h-[40%]">
+              <div className="max-h-[42%] space-y-3 overflow-y-auto border-t border-synapse-border px-4 py-3">
                 <DockerPanel scanResult={scanResult} />
                 <DependencyPanel dependencies={scanResult.dependencies} />
               </div>
@@ -39,17 +47,14 @@ function App() {
           </div>
         }
         canvas={
-          <ArchitectureCanvas
-            graph={scanResult?.graph || null}
-            selectedNodeId={selectedNode?.id}
-            onNodeClick={selectNode}
-          />
-        }
-        inspector={
-          <InspectorPanel
-            selectedNode={selectedNode}
-            onClose={clearSelection}
-          />
+          <div className="relative h-full w-full">
+            <ArchitectureCanvas
+              graph={scanResult?.graph || null}
+              selectedNodeId={selectedNode?.id}
+              onNodeClick={selectNode}
+            />
+            <ContextualInspector selectedNode={selectedNode} onClose={clearSelection} />
+          </div>
         }
       />
     </motion.div>

@@ -8,13 +8,16 @@ export default {
     extend: {
       colors: {
         synapse: {
-          dark: "#0a0e27",
-          darker: "#050811",
-          panel: "#0f1428",
-          cyan: "#00d9ff",
-          violet: "#a855f7",
-          red: "#ff1744",
-          muted: "#1e2749",
+          bg: "#09090b",
+          surface: "#111827",
+          panel: "#18181b",
+          border: "rgba(255,255,255,0.06)",
+          accent: "#22d3ee",
+          success: "#10b981",
+          warning: "#f59e0b",
+          danger: "#ef4444",
+          text: "#f8fafc",
+          "text-muted": "#94a3b8",
         },
       },
       backdropBlur: {

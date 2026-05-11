@@ -40,66 +40,62 @@ export function DockerPanel({ scanResult }: DockerPanelProps) {
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-xl border border-white/6 bg-white/[0.02] p-3.5"
+      className="rounded-lg border border-synapse-border bg-synapse-surface/60 p-3.5"
     >
-      <div className="flex items-center gap-2 mb-3">
-        <Container size={14} className="text-blue-400" />
-        <p className="text-[9px] uppercase tracking-[0.4em] text-cyan-400/50">
+      <div className="mb-3 flex items-center gap-2">
+        <Container size={14} className="text-sky-400" />
+        <p className="text-[10px] uppercase tracking-[0.14em] text-synapse-text-muted">
           Docker
         </p>
       </div>
 
-      {/* Docker Availability */}
-      <div className="rounded-lg border border-white/4 bg-white/[0.01] px-3 py-2 mb-2">
+      <div className="mb-2 rounded-lg border border-synapse-border bg-synapse-bg/55 px-3 py-2">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-white/40">Docker CLI</span>
+          <span className="text-[10px] text-synapse-text-muted">Docker CLI</span>
           {checking ? (
-            <Loader2 size={12} className="text-cyan-400 animate-spin" />
+            <Loader2 size={12} className="animate-spin text-synapse-accent" />
           ) : dockerStatus?.available ? (
             <div className="flex items-center gap-1">
-              <CheckCircle size={11} className="text-emerald-400" />
-              <span className="text-[10px] text-emerald-400">Available</span>
+              <CheckCircle size={11} className="text-synapse-success" />
+              <span className="text-[10px] text-synapse-success">Available</span>
             </div>
           ) : (
             <div className="flex items-center gap-1">
-              <XCircle size={11} className="text-red-400/60" />
-              <span className="text-[10px] text-red-400/60">Not found</span>
+              <XCircle size={11} className="text-synapse-danger/80" />
+              <span className="text-[10px] text-synapse-danger/80">Not found</span>
             </div>
           )}
         </div>
         {dockerStatus?.version && (
-          <p className="mt-1 text-[9px] text-white/25 font-mono truncate">
+          <p className="mt-1 truncate font-mono text-[9px] text-synapse-text-muted">
             {dockerStatus.version}
           </p>
         )}
       </div>
 
-      {/* Project Docker Status */}
-      <div className="rounded-lg border border-white/4 bg-white/[0.01] px-3 py-2 mb-2">
+      <div className="mb-2 rounded-lg border border-synapse-border bg-synapse-bg/55 px-3 py-2">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-white/40">Project Docker</span>
+          <span className="text-[10px] text-synapse-text-muted">Project Docker</span>
           {scanResult.hasDocker ? (
-            <span className="text-[10px] text-emerald-400">Detected</span>
+            <span className="text-[10px] text-synapse-success">Detected</span>
           ) : (
-            <span className="text-[10px] text-white/25">Not detected</span>
+            <span className="text-[10px] text-synapse-text-muted">Not detected</span>
           )}
         </div>
       </div>
 
-      {/* Docker Files */}
       {dockerFiles.length > 0 && (
         <div className="space-y-1">
           {dockerFiles.map((f) => (
-            <div key={f.id} className="rounded-lg bg-blue-500/5 border border-blue-500/10 px-2.5 py-1.5">
-              <p className="text-[10px] text-blue-400 truncate">{f.name}</p>
-              <p className="text-[9px] text-white/20 truncate">{f.relativePath}</p>
+            <div key={f.id} className="rounded-md border border-synapse-border bg-synapse-bg/55 px-2.5 py-1.5">
+              <p className="truncate text-[10px] text-sky-400">{f.name}</p>
+              <p className="truncate text-[9px] text-synapse-text-muted">{f.relativePath}</p>
             </div>
           ))}
         </div>
       )}
 
-      {/* Future Placeholder */}
-      <p className="mt-2 text-[9px] text-white/20 italic">
+      <p className="mt-2 text-[9px] italic text-synapse-text-muted">
         Container monitoring — coming soon
       </p>
     </motion.div>

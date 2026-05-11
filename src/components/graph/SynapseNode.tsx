@@ -14,69 +14,37 @@ interface SynapseNodeProps {
 
 const nodeConfig: Record<string, {
   icon: React.ReactNode;
-  gradient: string;
-  glow: string;
-  borderColor: string;
+  tint: string;
 }> = {
   entry: {
-    icon: <Crown size={16} className="text-amber-400" />,
-    gradient: "from-amber-500/20 via-slate-950/90 to-slate-950",
-    glow: "shadow-[0_0_24px_rgba(251,191,36,0.25)]",
-    borderColor: "border-amber-500/30",
+    icon: <Crown size={15} className="text-synapse-warning" />,
+    tint: "bg-synapse-warning/10 text-synapse-warning",
   },
   folder: {
-    icon: <Folder size={16} className="text-violet-400" />,
-    gradient: "from-violet-500/20 via-slate-950/90 to-slate-950",
-    glow: "shadow-[0_0_18px_rgba(168,85,247,0.2)]",
-    borderColor: "border-violet-500/25",
+    icon: <Folder size={15} className="text-synapse-text-muted" />,
+    tint: "bg-slate-300/10 text-slate-300",
   },
   file: {
-    icon: <FileCode2 size={16} className="text-cyan-400" />,
-    gradient: "from-cyan-500/15 via-slate-950/90 to-slate-950",
-    glow: "shadow-[0_0_16px_rgba(0,217,255,0.15)]",
-    borderColor: "border-cyan-500/20",
+    icon: <FileCode2 size={15} className="text-synapse-accent" />,
+    tint: "bg-synapse-accent/10 text-synapse-accent",
   },
   dependency: {
-    icon: <Package size={16} className="text-emerald-400" />,
-    gradient: "from-emerald-500/15 via-slate-950/90 to-slate-950",
-    glow: "shadow-[0_0_14px_rgba(52,211,153,0.15)]",
-    borderColor: "border-emerald-500/20",
+    icon: <Package size={15} className="text-synapse-success" />,
+    tint: "bg-synapse-success/10 text-synapse-success",
   },
   config: {
-    icon: <Settings size={16} className="text-amber-400" />,
-    gradient: "from-amber-500/15 via-slate-950/90 to-slate-950",
-    glow: "shadow-[0_0_14px_rgba(251,191,36,0.15)]",
-    borderColor: "border-amber-500/20",
+    icon: <Settings size={15} className="text-synapse-warning" />,
+    tint: "bg-synapse-warning/10 text-synapse-warning",
   },
   docker: {
-    icon: <Container size={16} className="text-blue-400" />,
-    gradient: "from-blue-500/20 via-slate-950/90 to-slate-950",
-    glow: "shadow-[0_0_20px_rgba(59,130,246,0.25)]",
-    borderColor: "border-blue-500/25",
-  },
-};
-
-const riskOverrides: Record<string, {
-  glow: string;
-  borderColor: string;
-}> = {
-  high: {
-    glow: "shadow-[0_0_30px_rgba(255,23,68,0.35)]",
-    borderColor: "border-red-500/40",
-  },
-  medium: {
-    glow: "shadow-[0_0_20px_rgba(251,191,36,0.25)]",
-    borderColor: "border-amber-500/30",
+    icon: <Container size={15} className="text-sky-400" />,
+    tint: "bg-sky-400/10 text-sky-400",
   },
 };
 
 const SynapseNode = memo(({ data, selected }: SynapseNodeProps) => {
   const config = nodeConfig[data.nodeType] || nodeConfig.file;
-  const risk = riskOverrides[data.riskLevel];
   const isHighRisk = data.riskLevel === "high";
-
-  const glow = risk?.glow || config.glow;
-  const border = risk?.borderColor || config.borderColor;
 
   // For dependency nodes, show version
   const version = data.metadata?.version as string | undefined;
@@ -84,74 +52,72 @@ const SynapseNode = memo(({ data, selected }: SynapseNodeProps) => {
 
   return (
     <motion.div
-      initial={{ scale: 0.85, opacity: 0 }}
+      initial={{ scale: 0.96, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      whileHover={{ scale: 1.05, y: -3 }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      transition={{ duration: 0.18 }}
       className={`
-        relative min-w-[160px] max-w-[220px] overflow-hidden rounded-xl border
-        bg-gradient-to-br px-3.5 py-2.5 cursor-pointer transition-all duration-200
-        ${config.gradient} ${border} ${glow}
-        ${selected ? "ring-2 ring-cyan-400/70 shadow-[0_0_40px_rgba(0,217,255,0.3)]" : ""}
+        relative min-w-[180px] max-w-[250px] cursor-pointer overflow-hidden rounded-xl border
+        bg-synapse-panel/92 px-3.5 py-3 text-left transition-all duration-150
+        ${selected ? "border-synapse-accent/70 shadow-[0_8px_20px_rgba(0,0,0,0.35)]" : "border-synapse-border"}
       `}
     >
-      {/* Specular highlight */}
-      <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),transparent_35%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(165deg,rgba(255,255,255,0.03),transparent_35%)]" />
 
       <Handle
         type="target"
         position={Position.Top}
-        className="!h-1.5 !w-1.5 !border-0 !bg-cyan-400/70 !-top-[3px]"
+        className="!-top-[3px] !h-1.5 !w-1.5 !border-0 !bg-synapse-accent/80"
       />
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!h-1.5 !w-1.5 !border-0 !bg-violet-400/70 !-bottom-[3px]"
+        className="!-bottom-[3px] !h-1.5 !w-1.5 !border-0 !bg-slate-300/80"
       />
 
-      {/* High risk pulse */}
       {isHighRisk && (
         <motion.div
-          className="absolute -inset-px rounded-xl border border-red-500/50"
-          animate={{ opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
+          className="absolute right-2 top-2 rounded-md border border-synapse-danger/40 bg-synapse-danger/10 px-1.5 py-0.5 text-[10px] font-medium text-synapse-danger"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          High
+        </motion.div>
       )}
 
       <div className="relative z-10 flex items-start gap-2.5">
-        <div className="rounded-lg border border-white/10 bg-white/5 p-1.5 backdrop-blur-sm flex-shrink-0">
+        <div className={`shrink-0 rounded-lg border border-synapse-border p-1.5 ${config.tint}`}>
           {isHighRisk ? (
-            <AlertTriangle size={16} className="text-red-400" />
+            <AlertTriangle size={15} className="text-synapse-danger" />
           ) : data.nodeType === "entry" ? (
-            <Crown size={16} className="text-amber-400" />
+            <Crown size={15} className="text-synapse-warning" />
           ) : (
             config.icon
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <span className="block truncate text-[13px] font-semibold text-white leading-tight">
+          <span className="block truncate text-[13px] font-semibold leading-tight text-synapse-text">
             {data.label}
           </span>
           {data.nodeType === "dependency" && version && (
-            <span className="block text-[10px] text-emerald-400/60 mt-0.5">
+            <span className="mt-0.5 block text-[10px] text-synapse-success/90">
               {version}
             </span>
           )}
           {data.nodeType === "dependency" && depType && (
-            <span className="block text-[9px] uppercase tracking-wider text-white/30 mt-0.5">
+            <span className="mt-0.5 block text-[9px] tracking-normal text-synapse-text-muted">
               {depType}
             </span>
           )}
           {data.nodeType !== "dependency" && (
-            <span className="block truncate text-[10px] text-white/40 mt-0.5">
+            <span className="mt-0.5 block truncate text-[10px] text-synapse-text-muted">
               {data.nodeType}
             </span>
           )}
         </div>
       </div>
 
-      {/* Bottom gradient line */}
-      <div className="relative z-10 mt-2 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="relative z-10 mt-2 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
     </motion.div>
   );
 });

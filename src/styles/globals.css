@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-synapse-dark: #0a0e27;
-  --color-synapse-darker: #050811;
-  --color-synapse-panel: #0f1428;
-  --color-synapse-cyan: #00d9ff;
-  --color-synapse-violet: #a855f7;
-  --color-synapse-red: #ff1744;
-  --color-synapse-muted: #1e2749;
+  --color-synapse-bg: #09090b;
+  --color-synapse-surface: #111827;
+  --color-synapse-panel: #18181b;
+  --color-synapse-border: rgba(255, 255, 255, 0.06);
+  --color-synapse-accent: #22d3ee;
+  --color-synapse-success: #10b981;
+  --color-synapse-warning: #f59e0b;
+  --color-synapse-danger: #ef4444;
+  --color-synapse-text: #f8fafc;
+  --color-synapse-text-muted: #94a3b8;
 }
 
 /* ─── Base Resets ─── */
@@ -20,8 +23,8 @@
 html, body, #root {
   width: 100%;
   height: 100%;
-  background: #050811;
-  color: #e0e0ff;
+  background: #09090b;
+  color: #f8fafc;
   font-family: "Inter", "Segoe UI Variable", "Aptos", system-ui, sans-serif;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
@@ -30,18 +33,20 @@ html, body, #root {
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(0, 217, 255, 0.06), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.08), transparent 30%),
-    linear-gradient(180deg, #050811 0%, #060a13 50%, #04060c 100%);
+    radial-gradient(circle at 16% 8%, rgba(34, 211, 238, 0.08), transparent 32%),
+    radial-gradient(circle at 78% 80%, rgba(148, 163, 184, 0.08), transparent 38%),
+    linear-gradient(180deg, #0a0a0d 0%, #09090b 54%, #07070a 100%);
 }
 
-/* ─── Synapse Grid ─── */
-.synapse-grid {
+/* Subtle engineering depth texture */
+.synapse-depth {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    radial-gradient(circle at 22% 16%, rgba(34, 211, 238, 0.08), transparent 32%),
+    radial-gradient(circle at 78% 78%, rgba(148, 163, 184, 0.07), transparent 34%),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: auto, auto, 36px 36px, 36px 36px;
+  mask-image: radial-gradient(circle at center, black 52%, transparent 100%);
 }
 
 /* ─── React Flow Overrides ─── */
@@ -55,7 +60,7 @@ body {
 }
 
 .react-flow__edge-path {
-  filter: drop-shadow(0 0 4px rgba(0, 217, 255, 0.12));
+  filter: none;
 }
 
 .react-flow__minimap-node {
@@ -69,20 +74,20 @@ body {
 }
 
 .synapse-flow-controls button {
-  background: rgba(5, 8, 17, 0.85) !important;
-  color: #7dd3fc !important;
-  border-color: rgba(255, 255, 255, 0.06) !important;
-  backdrop-filter: blur(12px);
+  background: rgba(17, 24, 39, 0.82) !important;
+  color: #cbd5e1 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
   border-radius: 8px !important;
 }
 
 .synapse-flow-controls button:hover {
-  background: rgba(0, 217, 255, 0.08) !important;
+  background: rgba(34, 211, 238, 0.12) !important;
 }
 
 .react-flow__minimap {
-  background-color: rgba(5, 8, 17, 0.85) !important;
-  border: 1px solid rgba(0, 217, 255, 0.15) !important;
+  background-color: rgba(17, 24, 39, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 12px !important;
 }
 
@@ -97,16 +102,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.2);
+  background: rgba(148, 163, 184, 0.28);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.4);
+  background: rgba(148, 163, 184, 0.4);
 }
 
 /* ─── Selection ─── */
 ::selection {
-  background: rgba(0, 217, 255, 0.25);
+  background: rgba(34, 211, 238, 0.24);
   color: white;
 }
