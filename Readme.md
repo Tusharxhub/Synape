@@ -13,8 +13,7 @@
 </p>
 
 <p>
-  It does not just analyze software.  
-  It lets you <b>see software breathe, evolve, mutate, and communicate.</b>
+  It does not just analyze software. It lets you <b>see software breathe, evolve, mutate, and communicate.</b>
 </p>
 
 <br />
@@ -58,7 +57,7 @@ folders
 logs
 graphs
 terminal output
-````
+```
 
 SYNAPSE shows software like this:
 
