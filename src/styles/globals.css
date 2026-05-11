@@ -1,100 +1,95 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@theme {
+  --color-synapse-dark: #0a0e27;
+  --color-synapse-darker: #050811;
+  --color-synapse-panel: #0f1428;
+  --color-synapse-cyan: #00d9ff;
+  --color-synapse-violet: #a855f7;
+  --color-synapse-red: #ff1744;
+  --color-synapse-muted: #1e2749;
+}
+
+/* ─── Base Resets ─── */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
+html, body, #root {
   width: 100%;
   height: 100%;
   background: #050811;
   color: #e0e0ff;
-  font-family: "Segoe UI Variable", "Inter", "Aptos", sans-serif;
+  font-family: "Inter", "Segoe UI Variable", "Aptos", system-ui, sans-serif;
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(0, 217, 255, 0.08), transparent 28%),
-    radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 30%),
-    linear-gradient(180deg, #050811 0%, #060a13 42%, #04060c 100%);
+    radial-gradient(circle at top left, rgba(0, 217, 255, 0.06), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.08), transparent 30%),
+    linear-gradient(180deg, #050811 0%, #060a13 50%, #04060c 100%);
 }
 
-/* Glow effects */
-.glow-cyan {
-  text-shadow: 0 0 10px #00d9ff, 0 0 20px #00d9ff;
-  box-shadow: 0 0 20px #00d9ff;
-}
-
-.glow-violet {
-  text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
-  box-shadow: 0 0 20px #a855f7;
-}
-
-.glow-red {
-  box-shadow: 0 0 20px #ff1744, 0 0 40px #ff1744;
-}
-
-/* Glass effect */
-.glass {
-  background: rgba(15, 20, 40, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 217, 255, 0.1);
-}
-
-.glass-dark {
-  background: rgba(5, 8, 17, 0.6);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(168, 85, 247, 0.1);
-}
-
+/* ─── Synapse Grid ─── */
 .synapse-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(circle at center, black 52%, transparent 100%);
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
 }
 
-.synapse-flow-controls button {
-  background: rgba(5, 8, 17, 0.8) !important;
-  color: #7dd3fc !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(12px);
+/* ─── React Flow Overrides ─── */
+.react-flow {
+  background: transparent !important;
 }
 
-.synapse-flow-controls button:hover {
-  background: rgba(0, 217, 255, 0.1) !important;
-}
-
-.react-flow__node-custom {
+.react-flow__node-synapse {
   background: transparent;
   border: none;
 }
 
 .react-flow__edge-path {
-  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.16));
+  filter: drop-shadow(0 0 4px rgba(0, 217, 255, 0.12));
 }
 
 .react-flow__minimap-node {
-  stroke: rgba(255, 255, 255, 0.14);
+  stroke: rgba(255, 255, 255, 0.1);
 }
 
 .react-flow__controls {
   background: transparent !important;
   border: none !important;
+  box-shadow: none !important;
 }
 
-/* Scrollbar styling */
+.synapse-flow-controls button {
+  background: rgba(5, 8, 17, 0.85) !important;
+  color: #7dd3fc !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(12px);
+  border-radius: 8px !important;
+}
+
+.synapse-flow-controls button:hover {
+  background: rgba(0, 217, 255, 0.08) !important;
+}
+
+.react-flow__minimap {
+  background-color: rgba(5, 8, 17, 0.85) !important;
+  border: 1px solid rgba(0, 217, 255, 0.15) !important;
+  border-radius: 12px !important;
+}
+
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -102,24 +97,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.3);
-  border-radius: 4px;
+  background: rgba(168, 85, 247, 0.2);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.5);
+  background: rgba(168, 85, 247, 0.4);
 }
 
-/* React Flow overrides */
-.react-flow {
-  background: transparent;
-}
-
-.react-flow__minimap {
-  background-color: rgba(15, 20, 40, 0.8);
-  border: 1px solid rgba(0, 217, 255, 0.2);
-}
-
-.react-flow__controls {
-  box-shadow: none;
+/* ─── Selection ─── */
+::selection {
+  background: rgba(0, 217, 255, 0.25);
+  color: white;
 }

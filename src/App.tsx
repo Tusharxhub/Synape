@@ -1,84 +1,54 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { MainLayout } from "@/layouts/MainLayout";
-import { ProjectSidebar } from "@/features/Sidebar/ProjectSidebar";
-import { NodeInspector } from "@/features/Inspector/NodeInspector";
-import { ArchitectureGraph } from "@/components/Graph/ArchitectureGraph";
-import { useGraphStore } from "@/hooks/useGraphStore";
+import { AppShell } from "@/components/layout/AppShell";
+import { ArchitectureCanvas } from "@/components/graph/ArchitectureCanvas";
+import { ProjectOverview } from "@/components/panels/ProjectOverview";
+import { InspectorPanel } from "@/components/panels/InspectorPanel";
+import { DockerPanel } from "@/components/panels/DockerPanel";
+import { DependencyPanel } from "@/components/panels/DependencyPanel";
+import { useProjectImport } from "@/hooks/useProjectImport";
+import { useGraphSelection } from "@/hooks/useGraphSelection";
 
 function App() {
-  const {
-    nodes,
-    edges,
-    selectedNode,
-    projectPath,
-    projectMetadata,
-    isLoading,
-    setSelectedNode,
-    setIsLoading,
-    initializeMockGraph,
-  } = useGraphStore();
-
-  // Initialize mock graph on mount
-  useEffect(() => {
-    initializeMockGraph();
-  }, [initializeMockGraph]);
-
-  const handleImportProject = async (path: string) => {
-    setIsLoading(true);
-    initializeMockGraph(path);
-
-    window.setTimeout(() => {
-      setIsLoading(false);
-    }, 650);
-  };
-
-  const handleNodeClick = (nodeId: string) => {
-    const node = nodes.find((n) => n.id === nodeId);
-    if (node) {
-      setSelectedNode({
-        id: node.id,
-        label: node.label,
-        type: node.type,
-        path: node.path,
-        dependencies: node.dependencies,
-        metadata: {
-          size: node.size,
-          risk: node.risk,
-          totalDependencies: node.dependencies.length,
-        },
-      });
-    }
-  };
+  const { scanResult, isLoading, error, importProject, clearError } = useProjectImport();
+  const { selectedNode, selectNode, clearSelection } = useGraphSelection();
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6 }}
       className="w-screen h-screen overflow-hidden"
     >
-      <MainLayout
+      <AppShell
         sidebar={
-          <ProjectSidebar
-            projectPath={projectPath}
-            projectMetadata={projectMetadata}
-            isLoading={isLoading}
-            onImportProject={handleImportProject}
-          />
+          <div className="flex h-full flex-col overflow-hidden">
+            <ProjectOverview
+              scanResult={scanResult}
+              isLoading={isLoading}
+              error={error}
+              onImportProject={importProject}
+              onClearError={clearError}
+            />
+            {/* Docker & Dependency panels at bottom of sidebar */}
+            {scanResult && (
+              <div className="border-t border-white/[0.04] px-4 py-3 space-y-3 overflow-y-auto max-h-[40%]">
+                <DockerPanel scanResult={scanResult} />
+                <DependencyPanel dependencies={scanResult.dependencies} />
+              </div>
+            )}
+          </div>
         }
         canvas={
-          <ArchitectureGraph
-            nodes={nodes}
-            edges={edges}
+          <ArchitectureCanvas
+            graph={scanResult?.graph || null}
             selectedNodeId={selectedNode?.id}
-            onNodeClick={handleNodeClick}
+            onNodeClick={selectNode}
           />
         }
         inspector={
-          <NodeInspector
+          <InspectorPanel
             selectedNode={selectedNode}
-            onClose={() => setSelectedNode(null)}
+            onClose={clearSelection}
           />
         }
       />
