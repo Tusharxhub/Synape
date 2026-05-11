@@ -1,50 +1,88 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+import { MainLayout } from "@/layouts/MainLayout";
+import { ProjectSidebar } from "@/features/Sidebar/ProjectSidebar";
+import { NodeInspector } from "@/features/Inspector/NodeInspector";
+import { ArchitectureGraph } from "@/components/Graph/ArchitectureGraph";
+import { useGraphStore } from "@/hooks/useGraphStore";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const {
+    nodes,
+    edges,
+    selectedNode,
+    projectPath,
+    projectMetadata,
+    isLoading,
+    setSelectedNode,
+    setIsLoading,
+    initializeMockGraph,
+  } = useGraphStore();
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  // Initialize mock graph on mount
+  useEffect(() => {
+    initializeMockGraph();
+  }, [initializeMockGraph]);
+
+  const handleImportProject = async (path: string) => {
+    setIsLoading(true);
+    initializeMockGraph(path);
+
+    window.setTimeout(() => {
+      setIsLoading(false);
+    }, 650);
+  };
+
+  const handleNodeClick = (nodeId: string) => {
+    const node = nodes.find((n) => n.id === nodeId);
+    if (node) {
+      setSelectedNode({
+        id: node.id,
+        label: node.label,
+        type: node.type,
+        path: node.path,
+        dependencies: node.dependencies,
+        metadata: {
+          size: node.size,
+          risk: node.risk,
+          totalDependencies: node.dependencies.length,
+        },
+      });
+    }
+  };
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="w-screen h-screen overflow-hidden"
+    >
+      <MainLayout
+        sidebar={
+          <ProjectSidebar
+            projectPath={projectPath}
+            projectMetadata={projectMetadata}
+            isLoading={isLoading}
+            onImportProject={handleImportProject}
+          />
+        }
+        canvas={
+          <ArchitectureGraph
+            nodes={nodes}
+            edges={edges}
+            selectedNodeId={selectedNode?.id}
+            onNodeClick={handleNodeClick}
+          />
+        }
+        inspector={
+          <NodeInspector
+            selectedNode={selectedNode}
+            onClose={() => setSelectedNode(null)}
+          />
+        }
+      />
+    </motion.div>
   );
 }
 
