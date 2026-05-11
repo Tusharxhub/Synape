@@ -16,14 +16,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --unsafe-perm
+
+      - name: Rebuild optional native deps (tailwind oxide)
+        run: |
+          npm rebuild @tailwindcss/oxide --update-binary || true
 
       - name: Build (TypeScript + Vite)
         run: npm run build
