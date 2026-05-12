@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import {
   FolderOpen, Database, Zap, Cpu, ShieldCheck,
-  GitBranch, Container, FileText, Package as PackageIcon
+  GitBranch, Container, FileText, Package as PackageIcon, BookOpen,
 } from "lucide-react";
-import { formatBytes, formatNumber, getHealthColor } from "@/lib/format";
+import { formatBytes, formatNumber } from "@/lib/format";
 import type { ProjectScanResult, AppError } from "@/types";
 
 interface ProjectOverviewProps {
@@ -92,6 +92,7 @@ export function ProjectOverview({
           animate={{ opacity: 1, y: 0 }}
           className="flex-1 space-y-5 overflow-y-auto px-5 py-4"
         >
+          {/* Project Identity */}
           <div className="space-y-1">
             <p className="text-[10px] font-medium text-synapse-text-muted/80">Project Identity</p>
             <p className="truncate text-base font-semibold text-synapse-text">
@@ -110,6 +111,7 @@ export function ProjectOverview({
 
           <div className="h-px w-full bg-synapse-border/30" />
 
+          {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-3">
             <StatCard icon={<Database size={13} className="text-synapse-accent/80" />} label="Files" value={formatNumber(scanResult.totalFiles)} color="text-synapse-text" />
             <StatCard icon={<FolderOpen size={13} className="text-slate-400" />} label="Folders" value={formatNumber(scanResult.totalFolders)} color="text-synapse-text" />
@@ -119,20 +121,12 @@ export function ProjectOverview({
 
           <div className="h-px w-full bg-synapse-border/30" />
 
-          <div className="space-y-1.5">
-            <p className="mb-2 text-[10px] font-medium text-synapse-text-muted/80">Health Indicator</p>
-            <div className="flex items-baseline gap-2">
-              <span className={`text-2xl font-semibold tracking-tight ${getHealthColor(scanResult.healthScore)}`}>
-                {scanResult.healthScore}
-              </span>
-              <span className="pb-0.5 text-xs font-medium text-synapse-text-muted/50">/ 100</span>
-            </div>
-          </div>
-
-          <div className="space-y-2 pt-2">
+          {/* Status rows */}
+          <div className="space-y-2 pt-1">
             <StatusRow icon={<PackageIcon size={12} />} label="Manager" value={scanResult.packageManager} />
             <StatusRow icon={<GitBranch size={12} />} label="Git" value={scanResult.hasGit ? "Initialized" : "Not found"} active={scanResult.hasGit} />
             <StatusRow icon={<Container size={12} />} label="Docker" value={scanResult.hasDocker ? "Detected" : "Not found"} active={scanResult.hasDocker} />
+            <StatusRow icon={<BookOpen size={12} />} label="README" value={scanResult.hasReadme ? "Present" : "Missing"} active={scanResult.hasReadme} />
             {scanResult.hasEnv && (
               <StatusRow icon={<ShieldCheck size={12} />} label="Env" value="Detected" active warning />
             )}

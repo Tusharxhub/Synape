@@ -1,4 +1,4 @@
-use crate::models::ProjectScanResult;
+use crate::models::{DockerProjectInfo, ProjectScanResult};
 use crate::scanner;
 use std::path::Path;
 
@@ -27,12 +27,41 @@ pub async fn scan_project(path: String) -> Result<ProjectScanResult, String> {
     // Check for Git
     let has_git = root.join(".git").exists();
 
-    // Check for Docker
-    let docker_files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml"];
+    // Check for Docker files
+    let docker_files = [
+        "Dockerfile",
+        "docker-compose.yml",
+        "docker-compose.yaml",
+        "compose.yml",
+        "compose.yaml",
+    ];
     let has_docker = docker_files.iter().any(|f| root.join(f).exists());
 
-    // Check for .env
+    // Build DockerProjectInfo
+    let dockerfile_path = if root.join("Dockerfile").exists() {
+        Some("Dockerfile".to_string())
+    } else {
+        None
+    };
+    let compose_path = ["docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml"]
+        .iter()
+        .find(|f| root.join(f).exists())
+        .map(|f| f.to_string());
+
+    let docker = DockerProjectInfo {
+        detected: has_docker,
+        dockerfile_path,
+        compose_path,
+    };
+
+    // Check for .env (existence only — never read contents)
     let has_env = root.join(".env").exists();
+
+    // Check for README
+    let has_readme = scan_result
+        .files
+        .iter()
+        .any(|f| f.name.to_lowercase().starts_with("readme"));
 
     // Extract project name from path
     let project_name = root
@@ -50,6 +79,15 @@ pub async fn scan_project(path: String) -> Result<ProjectScanResult, String> {
         &detected_framework,
         &package_manager,
     );
+
+    // Derive health status from score
+    let health_status = if health_score >= 80 {
+        "Healthy".to_string()
+    } else if health_score >= 50 {
+        "Needs Attention".to_string()
+    } else {
+        "Risky".to_string()
+    };
 
     // Generate architecture graph
     let graph = scanner::generate_graph(
@@ -72,11 +110,14 @@ pub async fn scan_project(path: String) -> Result<ProjectScanResult, String> {
         has_git,
         has_docker,
         has_env,
+        has_readme,
         health_score,
+        health_status,
         health_label,
         files: scan_result.files,
         folders: scan_result.folders,
         dependencies,
+        docker,
         graph,
     })
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Container, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { Container, CheckCircle, XCircle, Loader2, FileCode2 } from "lucide-react";
 import { checkDockerAvailable } from "@/lib/tauri";
 import type { ProjectScanResult, DockerStatus } from "@/types";
 
@@ -29,12 +29,7 @@ export function DockerPanel({ scanResult }: DockerPanelProps) {
 
   if (!scanResult) return null;
 
-  const dockerFiles = scanResult.files.filter(
-    (f) => f.name.toLowerCase().startsWith("dockerfile") ||
-           f.name.toLowerCase().includes("compose") ||
-           f.name.toLowerCase() === "compose.yml" ||
-           f.name.toLowerCase() === "compose.yaml"
-  );
+  const { docker } = scanResult;
 
   return (
     <motion.div
@@ -49,6 +44,7 @@ export function DockerPanel({ scanResult }: DockerPanelProps) {
         </p>
       </div>
 
+      {/* Docker CLI status */}
       <div className="mb-2 rounded-lg border border-synapse-border bg-synapse-bg/55 px-3 py-2">
         <div className="flex items-center justify-between">
           <span className="text-[10px] text-synapse-text-muted">Docker CLI</span>
@@ -73,10 +69,11 @@ export function DockerPanel({ scanResult }: DockerPanelProps) {
         )}
       </div>
 
+      {/* Project Docker detection */}
       <div className="mb-2 rounded-lg border border-synapse-border bg-synapse-bg/55 px-3 py-2">
         <div className="flex items-center justify-between">
           <span className="text-[10px] text-synapse-text-muted">Project Docker</span>
-          {scanResult.hasDocker ? (
+          {docker.detected ? (
             <span className="text-[10px] text-synapse-success">Detected</span>
           ) : (
             <span className="text-[10px] text-synapse-text-muted">Not detected</span>
@@ -84,14 +81,23 @@ export function DockerPanel({ scanResult }: DockerPanelProps) {
         </div>
       </div>
 
-      {dockerFiles.length > 0 && (
-        <div className="space-y-1">
-          {dockerFiles.map((f) => (
-            <div key={f.id} className="rounded-md border border-synapse-border bg-synapse-bg/55 px-2.5 py-1.5">
-              <p className="truncate text-[10px] text-sky-400">{f.name}</p>
-              <p className="truncate text-[9px] text-synapse-text-muted">{f.relativePath}</p>
-            </div>
-          ))}
+      {/* Dockerfile */}
+      {docker.dockerfilePath && (
+        <div className="mb-1 rounded-md border border-synapse-border bg-synapse-bg/55 px-2.5 py-1.5">
+          <div className="flex items-center gap-1.5">
+            <FileCode2 size={10} className="text-sky-400" />
+            <p className="truncate text-[10px] text-sky-400">{docker.dockerfilePath}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Compose file */}
+      {docker.composePath && (
+        <div className="mb-1 rounded-md border border-synapse-border bg-synapse-bg/55 px-2.5 py-1.5">
+          <div className="flex items-center gap-1.5">
+            <FileCode2 size={10} className="text-sky-400" />
+            <p className="truncate text-[10px] text-sky-400">{docker.composePath}</p>
+          </div>
         </div>
       )}
 

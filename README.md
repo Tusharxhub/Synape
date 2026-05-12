@@ -2,180 +2,207 @@
 
 ## Real-Time Software Intelligence Engine
 
-SYNAPSE is a native desktop application that analyzes local codebases, visualizes software architecture, detects dependencies, monitors project structure, and provides health diagnostics — all in a futuristic, cinematic interface.
+**SYNAPSE** is a native desktop application that scans local software projects, understands their structure, visualizes architecture as an interactive graph, detects engineering signals, and helps developers explore codebases visually.
 
-![SYNAPSE](https://img.shields.io/badge/SYNAPSE-v0.1.0-00d9ff?style=for-the-badge&labelColor=050811)
-![Tauri](https://img.shields.io/badge/Tauri-2.x-FFC131?style=for-the-badge&logo=tauri&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![Rust](https://img.shields.io/badge/Rust-Backend-000000?style=for-the-badge&logo=rust&logoColor=white)
+> **SYNAPSE turns a codebase into a living architecture map.**
 
 ---
 
-## Features
+## ✨ Features
 
-- **Native Desktop App** — Built with Tauri 2 + Rust for a lightweight, secure desktop experience
-- **Project Import** — Native folder picker to import any local project directory
-- **Filesystem Scanner** — Rust-powered scanner that analyzes project structure, files, and folders
-- **Framework Detection** — Automatically detects 15+ frameworks (React, Next.js, Vite, Tauri, Express, NestJS, etc.)
-- **Dependency Extraction** — Parses `package.json` for all dependency types
-- **Architecture Graph** — Interactive React Flow visualization of project architecture
-- **Node Inspector** — Click any node to inspect its type, risk level, path, and metadata
-- **Health Score** — Computed health score based on project best practices
-- **Docker Integration** — Detects Docker files and checks Docker CLI availability
-- **Security-First** — Read-only scanning, `.env` contents are never read or displayed
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Desktop Shell | Tauri 2 |
-| Backend | Rust |
-| Frontend | React 19, TypeScript |
-| Build Tool | Vite 7 |
-| Styling | Tailwind CSS 4 |
-| Animation | Framer Motion |
-| Graph | React Flow |
-| Icons | Lucide React |
+- **Native project folder import** — Open any local software project
+- **Safe filesystem scanning** — Read-only analysis, no destructive operations
+- **Project metadata extraction** — Files, folders, size, structure
+- **Dependency extraction** — Parses `package.json` (dependencies, devDependencies, peer, optional)
+- **Framework detection** — Auto-detects 20+ frameworks (Next.js, React, Vite, Tauri, Express, NestJS, Prisma, Rust, Go, and more)
+- **Docker detection** — Detects Dockerfile, docker-compose files, Docker CLI availability
+- **Architecture graph** — Interactive React Flow visualization with custom nodes
+- **Floating node inspector** — Click any node for detailed metadata
+- **Command palette** — `Ctrl+K` to search files, nodes, dependencies, and run actions
+- **Project overview sidebar** — Stats, framework, package manager, Git, Docker, .env status
+- **Health score** — Project health scoring (0–100) with detailed breakdown
+- **Clean folder structure** — Modular Rust backend + React frontend
+- **Safe error handling** — Graceful error states for all failure modes
+- **Premium UI** — Calm, futuristic interface inspired by Linear, Raycast, and Figma
 
 ---
 
-## Prerequisites
+## 🛠️ Tech Stack
 
-- [Node.js](https://nodejs.org/) (v18+)
-- [Rust](https://www.rust-lang.org/tools/install) (latest stable)
-- [Tauri CLI](https://tauri.app/start/)
-- System dependencies for Tauri (see [Tauri Prerequisites](https://tauri.app/start/prerequisites/))
+### Desktop
+- [Tauri](https://tauri.app) — Native desktop framework
+- [Rust](https://www.rust-lang.org) — Backend systems language
 
-### Linux (Fedora/Ubuntu)
+### Frontend
+- [React](https://react.dev) — UI framework
+- [TypeScript](https://www.typescriptlang.org) — Type-safe JavaScript
+- [Vite](https://vitejs.dev) — Fast build tool
+- [Tailwind CSS v4](https://tailwindcss.com) — Utility-first CSS
+- [Framer Motion](https://www.framer.com/motion/) — Animations
+- [React Flow](https://reactflow.dev) — Graph visualization
+- [Lucide React](https://lucide.dev) — Icon library
+
+### Rust Backend
+- `walkdir` — Recursive filesystem traversal
+- `serde` / `serde_json` — Serialization
+- `tauri-plugin-dialog` — Native file picker
+
+---
+
+## 📦 Setup
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org) ≥ 18
+- [Rust](https://rustup.rs) (latest stable)
+- System dependencies for Tauri ([see Tauri prerequisites](https://v2.tauri.app/start/prerequisites/))
+
+### Install
 
 ```bash
-# Fedora
-sudo dnf install webkit2gtk4.1-devel openssl-devel curl wget file libappindicator-gtk3-devel librsvg2-devel
-
-# Ubuntu
-sudo apt install libwebkit2gtk-4.1-dev libssl-dev curl wget file libayatana-appindicator3-dev librsvg2-dev
-```
-
----
-
-## Setup
-
-```bash
-# Clone the repository
 git clone https://github.com/Tusharxhub/Synape.git
 cd Synape
-
-# Install frontend dependencies
 npm install
+```
 
-# Run in development mode
+### Development
+
+```bash
 npm run tauri:dev
+```
+
+> **Fedora / Wayland note:** The `tauri:dev` script includes `WEBKIT_DISABLE_DMABUF_RENDERER=1` via `cross-env` to fix WebKitGTK rendering issues on Wayland.
+
+### Build
+
+```bash
+npm run tauri:build
 ```
 
 ### Available Scripts
 
 | Script | Description |
-|--------|-------------|
-| `npm run dev` | Start Vite dev server only |
-| `npm run build` | TypeScript check + Vite production build |
-| `npm run tauri:dev` | Start full Tauri desktop app in dev mode |
+|---|---|
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | TypeScript check + Vite build |
+| `npm run tauri:dev` | Launch Tauri desktop app (dev) |
 | `npm run tauri:build` | Build production desktop app |
-
-### Fedora/Wayland Note
-
-The `tauri:dev` script includes `WEBKIT_DISABLE_DMABUF_RENDERER=1` to work around a known WebKit rendering issue on Wayland. If you encounter display issues, you can also try:
-
-```bash
-GDK_BACKEND=x11 npm run tauri:dev
-```
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format with Prettier |
 
 ---
 
-## Project Structure
+## 🏗️ Architecture
 
 ```
-Synape/
-├── src/                          # Frontend (React + TypeScript)
+SYNAPSE/
+├── src/                        # React frontend
+│   ├── App.tsx                 # Main app component
+│   ├── main.tsx                # Entry point
 │   ├── components/
-│   │   ├── graph/                # React Flow graph components
+│   │   ├── graph/              # Architecture graph components
 │   │   │   ├── ArchitectureCanvas.tsx
-│   │   │   ├── SynapseNode.tsx
-│   │   │   └── GraphLegend.tsx
-│   │   ├── layout/
-│   │   │   └── AppShell.tsx
-│   │   └── panels/
-│   │       ├── ProjectOverview.tsx
-│   │       ├── InspectorPanel.tsx
-│   │       ├── DockerPanel.tsx
-│   │       └── DependencyPanel.tsx
-│   ├── hooks/
-│   │   ├── useProjectImport.ts
-│   │   └── useGraphSelection.ts
-│   ├── lib/
-│   │   ├── tauri.ts              # Tauri API bridge
-│   │   ├── graph.ts              # Graph layout logic
-│   │   └── format.ts             # Formatting utilities
-│   ├── types/
-│   │   └── synapse.ts            # TypeScript type definitions
-│   ├── styles/
-│   │   └── globals.css
-│   ├── App.tsx
-│   └── main.tsx
+│   │   │   ├── GraphEmptyState.tsx
+│   │   │   ├── GraphLegend.tsx
+│   │   │   └── SynapseNode.tsx
+│   │   ├── layout/             # Shell, top bar, command palette
+│   │   │   ├── AppShell.tsx
+│   │   │   ├── CommandBar.tsx
+│   │   │   └── CommandPalette.tsx
+│   │   ├── panels/             # Sidebar panels
+│   │   │   ├── ContextualInspector.tsx
+│   │   │   ├── DependencyPanel.tsx
+│   │   │   ├── DockerPanel.tsx
+│   │   │   ├── HealthPanel.tsx
+│   │   │   └── ProjectOverview.tsx
+│   │   └── ui/                 # Shared UI primitives
+│   │       ├── Badge.tsx
+│   │       ├── Button.tsx
+│   │       ├── Card.tsx
+│   │       └── StatusDot.tsx
+│   ├── hooks/                  # Custom React hooks
+│   ├── lib/                    # Utilities
+│   ├── styles/                 # Global CSS
+│   └── types/                  # TypeScript type definitions
 │
-├── src-tauri/                    # Backend (Rust)
+├── src-tauri/                  # Rust backend
 │   └── src/
-│       ├── lib.rs                # Tauri app entry
-│       ├── main.rs
-│       ├── commands/
-│       │   ├── scan_project.rs   # Project scan command
-│       │   └── docker.rs         # Docker check command
-│       ├── scanner/
-│       │   ├── filesystem.rs     # Filesystem walker
-│       │   ├── package_json.rs   # package.json parser
-│       │   ├── framework.rs      # Framework detector
-│       │   ├── graph.rs          # Architecture graph generator
-│       │   └── health.rs         # Health score calculator
-│       └── models/
-│           └── project.rs        # Data models (Serde)
+│       ├── lib.rs              # Tauri app setup
+│       ├── main.rs             # Entry point
+│       ├── commands/           # Tauri IPC commands
+│       │   ├── scan_project.rs
+│       │   └── docker.rs
+│       ├── scanner/            # Core scanning modules
+│       │   ├── filesystem.rs
+│       │   ├── package_json.rs
+│       │   ├── framework.rs
+│       │   ├── graph.rs
+│       │   └── health.rs
+│       └── models/             # Data structures
+│           └── project.rs
 │
+├── index.html
 ├── package.json
-├── vite.config.ts
 ├── tsconfig.json
-└── README.md
+├── vite.config.ts
+└── tailwind.config.js
 ```
 
 ---
 
-## How It Works
+## 🛡️ Security
 
-1. **Import** — Click "Import Project" to open the native folder picker
-2. **Scan** — Rust backend scans the filesystem (skipping `node_modules`, `.git`, etc.)
-3. **Analyze** — Detects framework, package manager, dependencies, Docker files
-4. **Visualize** — Generates an architecture graph with up to 120 prioritized nodes
-5. **Inspect** — Click any node to see its metadata, risk level, and path
-6. **Assess** — View health score based on project best practices
-
----
-
-## Security
-
-SYNAPSE is designed as a **read-only** analysis tool:
-
-- ✅ Only reads filesystem metadata and structure
-- ✅ `.env` files are detected but contents are **never** read or displayed
-- ✅ No destructive commands are ever executed
-- ✅ Docker check only runs `docker --version`
-- ✅ No network requests, no cloud backend
-- ✅ No automatic script execution
+- **Read-only scanning** — SYNAPSE never modifies, executes, or deletes any files
+- **No .env exposure** — `.env` file existence is detected, but contents are never read or displayed
+- **No cloud backend** — All processing happens locally on your machine
+- **No authentication** — Desktop-only, no accounts required
+- **No script execution** — Project scripts are never run
 
 ---
 
-## License
+## 🗺️ Roadmap
 
-MIT
+### v0.1 (Current)
+- [x] Native project folder import
+- [x] Rust filesystem scanner
+- [x] Dependency extraction
+- [x] Framework detection
+- [x] Docker detection
+- [x] Architecture graph visualization
+- [x] Floating node inspector
+- [x] Command palette
+- [x] Health score
+- [x] Premium UI
+
+### v0.2 (Planned)
+- [ ] Import/export graph data
+- [ ] File-level dependency graph (imports/exports)
+- [ ] Multiple project tabs
+- [ ] Recent projects persistence
+- [ ] Code complexity metrics
+- [ ] Customizable graph layout algorithms
+- [ ] Light theme option
+
+### v0.3 (Future)
+- [ ] Git history visualization
+- [ ] Branch comparison
+- [ ] Real-time file watching
+- [ ] Plugin system
+- [ ] Performance profiling view
 
 ---
 
-Built by [Tushar Kanti Dey](https://github.com/Tusharxhub)
+## 👤 Author
+
+**Tushar Kanti Dey**
+
+- 🌐 Portfolio: [tushardevx01.tech](https://www.tushardevx01.tech)
+- 🐙 GitHub: [@Tusharxhub](https://github.com/Tusharxhub)
+- 📧 Email: [thetushardev0@gmail.com](mailto:thetushardev0@gmail.com)
+- 📸 Instagram: [@tushardevx01](https://www.instagram.com/tushardevx01/)
+
+---
+
+## 📄 License
+
+This project is private. All rights reserved.

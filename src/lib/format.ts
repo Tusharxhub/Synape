@@ -1,8 +1,3 @@
-/// Simple class merger
-export function cn(...inputs: (string | undefined | null | false)[]) {
-  return inputs.filter(Boolean).join(" ");
-}
-
 /// Format bytes to human-readable string
 export function formatBytes(bytes: number): string {
   if (bytes === 0) return "0 B";

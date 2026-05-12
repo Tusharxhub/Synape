@@ -145,6 +145,18 @@ pub fn scan_filesystem(root_path: &str) -> Result<ScanResult, String> {
 fn categorize_file(name: &str, extension: Option<&str>) -> String {
     let lower_name = name.to_lowercase();
 
+    // Environment files — detect existence only, never read contents
+    if lower_name == ".env"
+        || lower_name == ".env.local"
+        || lower_name == ".env.example"
+        || lower_name == ".env.development"
+        || lower_name == ".env.production"
+        || lower_name == ".env.test"
+        || lower_name == ".env.sample"
+    {
+        return "environment".to_string();
+    }
+
     // Documentation
     if lower_name.starts_with("readme")
         || lower_name.starts_with("changelog")
@@ -152,6 +164,14 @@ fn categorize_file(name: &str, extension: Option<&str>) -> String {
         || lower_name.starts_with("contributing")
     {
         return "documentation".to_string();
+    }
+
+    // Test files — match .test.ts, .spec.tsx, __tests__ patterns
+    if lower_name.contains(".test.")
+        || lower_name.contains(".spec.")
+        || lower_name.contains("__tests__")
+    {
+        return "test".to_string();
     }
 
     // Config files
@@ -180,11 +200,8 @@ fn categorize_file(name: &str, extension: Option<&str>) -> String {
             // Styles
             "css" | "scss" | "sass" | "less" | "styl" => "style".to_string(),
 
-            // Tests
-            "test" | "spec" => "test".to_string(),
-
             // Config
-            "json" | "yaml" | "yml" | "toml" | "ini" | "env" | "lock" => "config".to_string(),
+            "json" | "yaml" | "yml" | "toml" | "ini" | "lock" => "config".to_string(),
 
             // Documentation
             "md" | "mdx" | "txt" | "rst" => "documentation".to_string(),

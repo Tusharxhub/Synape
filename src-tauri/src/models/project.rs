@@ -14,11 +14,14 @@ pub struct ProjectScanResult {
     pub has_git: bool,
     pub has_docker: bool,
     pub has_env: bool,
+    pub has_readme: bool,
     pub health_score: u32,
+    pub health_status: String,
     pub health_label: String,
     pub files: Vec<ProjectFile>,
     pub folders: Vec<ProjectFolder>,
     pub dependencies: Vec<ProjectDependency>,
+    pub docker: DockerProjectInfo,
     pub graph: ArchitectureGraph,
 }
 
@@ -84,4 +87,12 @@ pub struct ArchitectureEdge {
 pub struct DockerStatus {
     pub available: bool,
     pub version: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DockerProjectInfo {
+    pub detected: bool,
+    pub dockerfile_path: Option<String>,
+    pub compose_path: Option<String>,
 }

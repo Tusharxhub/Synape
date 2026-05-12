@@ -1,3 +1,27 @@
+// ─── Enums & Aliases ───
+
+export type PackageManager = "npm" | "yarn" | "pnpm" | "bun" | "unknown";
+
+export type FileCategory =
+  | "source"
+  | "config"
+  | "style"
+  | "asset"
+  | "test"
+  | "documentation"
+  | "environment"
+  | "unknown";
+
+export type RiskLevel = "low" | "medium" | "high";
+
+export type NodeType =
+  | "entry"
+  | "folder"
+  | "file"
+  | "dependency"
+  | "config"
+  | "docker";
+
 // ─── Project Scan Result (from Rust backend) ───
 
 export interface ProjectScanResult {
@@ -7,15 +31,18 @@ export interface ProjectScanResult {
   totalFolders: number;
   totalSizeBytes: number;
   detectedFramework: string | null;
-  packageManager: string;
+  packageManager: PackageManager;
   hasGit: boolean;
   hasDocker: boolean;
   hasEnv: boolean;
+  hasReadme: boolean;
   healthScore: number;
+  healthStatus: "Healthy" | "Needs Attention" | "Risky";
   healthLabel: string;
   files: ProjectFile[];
   folders: ProjectFolder[];
   dependencies: ProjectDependency[];
+  docker: DockerProjectInfo;
   graph: ArchitectureGraph;
 }
 
@@ -26,7 +53,7 @@ export interface ProjectFile {
   relativePath: string;
   extension: string | null;
   sizeBytes: number;
-  category: "source" | "config" | "style" | "asset" | "test" | "documentation" | "unknown";
+  category: FileCategory;
 }
 
 export interface ProjectFolder {
@@ -51,8 +78,8 @@ export interface ArchitectureNode {
   id: string;
   label: string;
   path: string;
-  nodeType: "folder" | "file" | "dependency" | "config" | "entry" | "docker";
-  riskLevel: "low" | "medium" | "high";
+  nodeType: NodeType;
+  riskLevel: RiskLevel;
   metadata: Record<string, string | number | boolean | null>;
 }
 
@@ -63,11 +90,17 @@ export interface ArchitectureEdge {
   edgeType: "contains" | "imports" | "depends_on" | "configures" | "dockerizes";
 }
 
-// ─── Docker Status ───
+// ─── Docker ───
 
 export interface DockerStatus {
   available: boolean;
   version: string | null;
+}
+
+export interface DockerProjectInfo {
+  detected: boolean;
+  dockerfilePath: string | null;
+  composePath: string | null;
 }
 
 // ─── UI State Types ───

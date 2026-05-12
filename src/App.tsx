@@ -7,6 +7,7 @@ import { ProjectOverview } from "@/components/panels/ProjectOverview";
 import { ContextualInspector } from "@/components/panels/ContextualInspector";
 import { DockerPanel } from "@/components/panels/DockerPanel";
 import { DependencyPanel } from "@/components/panels/DependencyPanel";
+import { HealthPanel } from "@/components/panels/HealthPanel";
 import { useProjectImport } from "@/hooks/useProjectImport";
 import { useGraphSelection } from "@/hooks/useGraphSelection";
 
@@ -30,7 +31,11 @@ function App() {
               hasProject={Boolean(scanResult)}
               onImportProject={importProject}
             />
-            <CommandPalette onImportClick={importProject} />
+            <CommandPalette
+              onImportClick={importProject}
+              scanResult={scanResult}
+              onNodeSelect={selectNode}
+            />
           </>
         }
         sidebar={
@@ -43,7 +48,8 @@ function App() {
               onClearError={clearError}
             />
             {scanResult && (
-              <div className="max-h-[42%] space-y-3 overflow-y-auto border-t border-synapse-border px-4 py-3">
+              <div className="max-h-[50%] space-y-3 overflow-y-auto border-t border-synapse-border px-4 py-3">
+                <HealthPanel scanResult={scanResult} />
                 <DockerPanel scanResult={scanResult} />
                 <DependencyPanel dependencies={scanResult.dependencies} />
               </div>
@@ -56,6 +62,7 @@ function App() {
               graph={scanResult?.graph || null}
               selectedNodeId={selectedNode?.id}
               onNodeClick={selectNode}
+              onImportProject={importProject}
             />
             <ContextualInspector selectedNode={selectedNode} onClose={clearSelection} />
           </div>

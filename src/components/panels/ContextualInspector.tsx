@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { AlertTriangle, FileCode2, Folder, Package, Settings, X } from "lucide-react";
+import { Container, Crown, FileCode2, Folder, Package, Settings, X } from "lucide-react";
 import type { SelectedNodeData } from "@/types";
 
 interface ContextualInspectorProps {
@@ -8,12 +8,12 @@ interface ContextualInspectorProps {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
+  entry: <Crown size={14} className="text-synapse-warning" />,
   folder: <Folder size={14} className="text-synapse-text-muted" />,
-  file: <FileCode2 size={14} className="text-synapse-text-muted" />,
+  file: <FileCode2 size={14} className="text-synapse-accent" />,
   dependency: <Package size={14} className="text-synapse-success" />,
   config: <Settings size={14} className="text-synapse-warning" />,
-  entry: <AlertTriangle size={14} className="text-synapse-warning" />,
-  docker: <Package size={14} className="text-synapse-accent" />,
+  docker: <Container size={14} className="text-sky-400" />,
 };
 
 function riskChipClass(riskLevel: string) {
