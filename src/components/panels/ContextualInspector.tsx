@@ -28,15 +28,15 @@ export function ContextualInspector({ selectedNode, onClose }: ContextualInspect
       {selectedNode && (
         <motion.aside
           key={selectedNode.id}
-          initial={{ opacity: 0, y: 10, scale: 0.98 }}
+          initial={{ opacity: 0, y: 16, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 8, scale: 0.99 }}
-          transition={{ duration: 0.18, ease: "easeOut" }}
-          className="absolute bottom-5 right-5 z-30 w-[340px] rounded-xl border border-synapse-border bg-synapse-panel/95 p-3 shadow-[0_18px_40px_rgba(0,0,0,0.45)] backdrop-blur-lg"
+          exit={{ opacity: 0, y: 8, scale: 0.98 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="absolute right-6 top-6 z-30 w-[340px] rounded-2xl border border-synapse-border/40 bg-synapse-panel/85 p-4 shadow-2xl backdrop-blur-2xl"
         >
-          <div className="mb-3 flex items-start justify-between gap-3 border-b border-synapse-border pb-3">
+          <div className="mb-4 flex items-start justify-between gap-3 border-b border-synapse-border/40 pb-3">
             <div className="min-w-0">
-              <p className="mb-1 text-[10px] uppercase tracking-[0.14em] text-synapse-text-muted">Node details</p>
+              <p className="mb-1 text-[10px] uppercase tracking-widest text-synapse-text-muted/70">Node Identity</p>
               <div className="flex items-center gap-2">
                 {iconMap[selectedNode.nodeType] ?? iconMap.file}
                 <p className="truncate text-sm font-semibold text-synapse-text">{selectedNode.label}</p>

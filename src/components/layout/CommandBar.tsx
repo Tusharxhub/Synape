@@ -35,13 +35,17 @@ export function CommandBar({
       <div className="hidden flex-1 items-center justify-center md:flex">
         <button
           type="button"
-          className="inline-flex w-full max-w-[440px] items-center justify-between rounded-lg border border-synapse-border bg-synapse-surface/70 px-3 py-1.5 text-xs text-synapse-text-muted transition-colors hover:text-synapse-text"
+          onClick={() => {
+            const event = new KeyboardEvent("keydown", { ctrlKey: true, metaKey: true, key: "k" });
+            window.dispatchEvent(event);
+          }}
+          className="inline-flex w-full max-w-[440px] items-center justify-between rounded-lg border border-synapse-border bg-synapse-surface/70 px-3 py-1.5 text-xs text-synapse-text-muted transition-colors hover:bg-synapse-surface hover:text-synapse-text shadow-sm"
         >
           <span className="inline-flex items-center gap-2">
             <Search size={13} />
             Search files, symbols, dependencies
           </span>
-          <span className="inline-flex items-center gap-1 rounded-md border border-synapse-border px-1.5 py-0.5 text-[10px]">
+          <span className="inline-flex items-center gap-1 rounded-md border border-synapse-border/60 px-1.5 py-0.5 text-[10px] bg-synapse-panel shadow-sm">
             <Command size={10} />
             K
           </span>

@@ -24,24 +24,24 @@ export function ProjectOverview({
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="flex h-full w-full flex-col overflow-hidden"
     >
-      <div className="border-b border-synapse-border px-5 py-4">
-        <p className="text-[10px] uppercase tracking-[0.14em] text-synapse-text-muted">
+      <div className="border-b border-synapse-border/40 px-5 py-4 bg-synapse-surface/20">
+        <p className="text-[9px] uppercase tracking-widest text-synapse-text-muted/70 font-semibold">
           Project overview
         </p>
-        <p className="mt-1.5 text-sm font-semibold text-synapse-text">
-          Real-time software intelligence
+        <p className="mt-1 text-sm font-medium text-synapse-text">
+          Architecture Inspector
         </p>
       </div>
 
-      <div className="px-4 pt-4">
+      <div className="px-5 pt-5">
         <button
           type="button"
           onClick={onImportProject}
           disabled={isLoading}
-          className="inline-flex w-full items-center justify-center gap-2.5 rounded-lg border border-synapse-border bg-synapse-surface/80 px-4 py-2.5 text-sm font-medium text-synapse-text transition-colors hover:bg-synapse-surface disabled:cursor-wait disabled:opacity-50"
+          className="inline-flex w-full items-center justify-center gap-2.5 rounded-md bg-synapse-text border border-transparent px-4 py-2 text-[13px] font-medium text-synapse-bg transition-colors hover:bg-slate-200 disabled:cursor-wait disabled:opacity-50 shadow-sm"
         >
-          <FolderOpen size={15} />
-          {isLoading ? "Scanning..." : "Import Project"}
+          <FolderOpen size={14} />
+          {isLoading ? "Scanning..." : "Open Directory"}
         </button>
       </div>
 
@@ -90,54 +90,51 @@ export function ProjectOverview({
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex-1 space-y-3 overflow-y-auto px-4 py-3"
+          className="flex-1 space-y-5 overflow-y-auto px-5 py-4"
         >
-          <div className="rounded-lg border border-synapse-border bg-synapse-surface/60 p-3.5">
-            <p className="mb-1 text-[10px] uppercase tracking-[0.14em] text-synapse-text-muted">
-              Project
-            </p>
-            <p className="truncate text-sm font-semibold text-synapse-text">
+          <div className="space-y-1">
+            <p className="text-[10px] font-medium text-synapse-text-muted/80">Project Identity</p>
+            <p className="truncate text-base font-semibold text-synapse-text">
               {scanResult.projectName}
             </p>
-            <p className="mt-1.5 break-all text-[10px] leading-relaxed text-synapse-text-muted">
+            <p className="break-all text-[11px] leading-relaxed text-synapse-text-muted/60">
               {scanResult.rootPath}
             </p>
             {scanResult.detectedFramework && (
-              <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-synapse-border bg-synapse-bg/70 px-2.5 py-1 text-[10px] text-synapse-text-muted">
+              <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-synapse-surface/60 px-2 py-0.5 text-[10px] font-medium text-synapse-text-muted/90 border border-synapse-border/40">
                 <ShieldCheck size={10} />
                 {scanResult.detectedFramework}
               </div>
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <StatCard icon={<Database size={13} className="text-synapse-accent" />} label="Files" value={formatNumber(scanResult.totalFiles)} color="text-synapse-text" />
-            <StatCard icon={<FolderOpen size={13} className="text-slate-300" />} label="Folders" value={formatNumber(scanResult.totalFolders)} color="text-synapse-text" />
-            <StatCard icon={<Zap size={13} className="text-synapse-success" />} label="Dependencies" value={formatNumber(scanResult.dependencies.length)} color="text-synapse-text" />
-            <StatCard icon={<FileText size={13} className="text-slate-300" />} label="Size" value={formatBytes(scanResult.totalSizeBytes)} color="text-synapse-text" />
+          <div className="h-px w-full bg-synapse-border/30" />
+
+          <div className="grid grid-cols-2 gap-3">
+            <StatCard icon={<Database size={13} className="text-synapse-accent/80" />} label="Files" value={formatNumber(scanResult.totalFiles)} color="text-synapse-text" />
+            <StatCard icon={<FolderOpen size={13} className="text-slate-400" />} label="Folders" value={formatNumber(scanResult.totalFolders)} color="text-synapse-text" />
+            <StatCard icon={<Zap size={13} className="text-synapse-success/80" />} label="Deps" value={formatNumber(scanResult.dependencies.length)} color="text-synapse-text" />
+            <StatCard icon={<FileText size={13} className="text-slate-400" />} label="Size" value={formatBytes(scanResult.totalSizeBytes)} color="text-synapse-text" />
           </div>
 
-          <div className="rounded-lg border border-synapse-border bg-synapse-surface/60 p-3.5">
-            <p className="mb-2 text-[10px] uppercase tracking-[0.14em] text-synapse-text-muted">
-              Health Score
-            </p>
-            <div className="flex items-end gap-2">
-              <span className={`text-3xl font-bold ${getHealthColor(scanResult.healthScore)}`}>
-                {scanResult.healthScore}
-              </span>
-              <span className="pb-1 text-sm text-synapse-text-muted">/100</span>
-            </div>
-            <p className={`mt-1 text-xs ${getHealthColor(scanResult.healthScore)}`}>
-              {scanResult.healthLabel}
-            </p>
-          </div>
+          <div className="h-px w-full bg-synapse-border/30" />
 
           <div className="space-y-1.5">
-            <StatusRow icon={<PackageIcon size={12} />} label="Package Manager" value={scanResult.packageManager} />
+            <p className="mb-2 text-[10px] font-medium text-synapse-text-muted/80">Health Indicator</p>
+            <div className="flex items-baseline gap-2">
+              <span className={`text-2xl font-semibold tracking-tight ${getHealthColor(scanResult.healthScore)}`}>
+                {scanResult.healthScore}
+              </span>
+              <span className="pb-0.5 text-xs font-medium text-synapse-text-muted/50">/ 100</span>
+            </div>
+          </div>
+
+          <div className="space-y-2 pt-2">
+            <StatusRow icon={<PackageIcon size={12} />} label="Manager" value={scanResult.packageManager} />
             <StatusRow icon={<GitBranch size={12} />} label="Git" value={scanResult.hasGit ? "Initialized" : "Not found"} active={scanResult.hasGit} />
             <StatusRow icon={<Container size={12} />} label="Docker" value={scanResult.hasDocker ? "Detected" : "Not found"} active={scanResult.hasDocker} />
             {scanResult.hasEnv && (
-              <StatusRow icon={<ShieldCheck size={12} />} label=".env" value="Detected" active warning />
+              <StatusRow icon={<ShieldCheck size={12} />} label="Env" value="Detected" active warning />
             )}
           </div>
         </motion.div>
@@ -164,26 +161,33 @@ export function ProjectOverview({
 
 function StatCard({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: string; color: string }) {
   return (
-    <div className="rounded-lg border border-synapse-border bg-synapse-surface/60 p-3">
-      <div className="mb-1 flex items-center gap-1.5">
+    <div className="flex flex-col rounded-lg bg-synapse-surface/30 p-2.5 outline outline-1 outline-synapse-border/40 shadow-sm transition-colors hover:bg-synapse-surface/50">
+      <div className="mb-1.5 flex items-center gap-1.5 text-synapse-text-muted">
         {icon}
-        <span className="text-[10px] uppercase tracking-[0.1em] text-synapse-text-muted">{label}</span>
+        <span className="text-[9px] font-semibold uppercase tracking-widest opacity-80">{label}</span>
       </div>
-      <p className={`text-lg font-bold ${color}`}>{value}</p>
+      <span className={`text-base font-semibold ${color}`}>{value}</span>
     </div>
   );
 }
 
 function StatusRow({ icon, label, value, active, warning }: { icon: React.ReactNode; label: string; value: string; active?: boolean; warning?: boolean }) {
+  const dotColor = active
+    ? warning
+      ? "bg-synapse-warning"
+      : "bg-synapse-success"
+    : "bg-synapse-border";
+
   return (
-    <div className="flex items-center justify-between rounded-lg border border-synapse-border bg-synapse-surface/55 px-3 py-2">
+    <div className="flex items-center justify-between rounded-md py-1.5 px-2 hover:bg-synapse-surface/30 transition-colors">
       <div className="flex items-center gap-2 text-synapse-text-muted">
-        {icon}
-        <span className="text-[10px]">{label}</span>
+        <span className="opacity-80">{icon}</span>
+        <span className="text-[11px] font-medium">{label}</span>
       </div>
-      <span className={`text-[10px] font-medium ${warning ? "text-synapse-warning" : active ? "text-synapse-success" : "text-synapse-text-muted"}`}>
-        {value}
-      </span>
+      <div className="flex items-center gap-2">
+        <span className="text-[11px] font-medium text-synapse-text-muted/80">{value}</span>
+        <div className={`h-1.5 w-1.5 rounded-full shadow-sm ${dotColor}`} />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { AppShell } from "@/components/layout/AppShell";
 import { CommandBar } from "@/components/layout/CommandBar";
+import { CommandPalette } from "@/components/layout/CommandPalette";
 import { ArchitectureCanvas } from "@/components/graph/ArchitectureCanvas";
 import { ProjectOverview } from "@/components/panels/ProjectOverview";
 import { ContextualInspector } from "@/components/panels/ContextualInspector";
@@ -22,12 +23,15 @@ function App() {
     >
       <AppShell
         commandBar={
-          <CommandBar
-            projectName={scanResult?.projectName}
-            isLoading={isLoading}
-            hasProject={Boolean(scanResult)}
-            onImportProject={importProject}
-          />
+          <>
+            <CommandBar
+              projectName={scanResult?.projectName}
+              isLoading={isLoading}
+              hasProject={Boolean(scanResult)}
+              onImportProject={importProject}
+            />
+            <CommandPalette onImportClick={importProject} />
+          </>
         }
         sidebar={
           <div className="flex h-full flex-col overflow-hidden">

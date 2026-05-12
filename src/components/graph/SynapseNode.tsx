@@ -8,7 +8,7 @@ import {
 import type { ArchitectureNode } from "@/types";
 
 interface SynapseNodeProps {
-  data: ArchitectureNode;
+  data: ArchitectureNode & { isDimmed?: boolean };
   selected?: boolean;
 }
 
@@ -52,27 +52,27 @@ const SynapseNode = memo(({ data, selected }: SynapseNodeProps) => {
 
   return (
     <motion.div
-      initial={{ scale: 0.96, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      whileHover={{ scale: 1.02, y: -2 }}
-      transition={{ duration: 0.18 }}
+      initial={{ scale: 0.98, opacity: 0 }}
+      animate={{ scale: 1, opacity: data.isDimmed ? 0.35 : 1 }}
+      whileHover={{ y: -1, opacity: 1 }}
+      transition={{ duration: 0.15, ease: "easeOut" }}
       className={`
-        relative min-w-[180px] max-w-[250px] cursor-pointer overflow-hidden rounded-xl border
-        bg-synapse-panel/92 px-3.5 py-3 text-left transition-all duration-150
-        ${selected ? "border-synapse-accent/70 shadow-[0_8px_20px_rgba(0,0,0,0.35)]" : "border-synapse-border"}
+        group relative min-w-[200px] max-w-[260px] cursor-pointer rounded-xl border
+        bg-synapse-panel px-3.5 py-3 text-left transition-all duration-300 backdrop-blur-md
+        ${selected ? "border-synapse-accent/60 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(34,211,238,0.2)]" : "border-synapse-border/80 shadow-md hover:border-synapse-text-muted/30 hover:shadow-lg hover:bg-synapse-surface"}
       `}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(165deg,rgba(255,255,255,0.03),transparent_35%)]" />
+      <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-b from-white/[0.04] to-transparent" />
 
       <Handle
         type="target"
         position={Position.Top}
-        className="!-top-[3px] !h-1.5 !w-1.5 !border-0 !bg-synapse-accent/80"
+        className="!-top-1.5 !h-2.5 !w-2.5 !border !border-synapse-panel !bg-synapse-text-muted transition-colors hover:!bg-synapse-text opacity-0 group-hover:opacity-100"
       />
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!-bottom-[3px] !h-1.5 !w-1.5 !border-0 !bg-slate-300/80"
+        className="!-bottom-1.5 !h-2.5 !w-2.5 !border !border-synapse-panel !bg-synapse-text-muted transition-colors hover:!bg-synapse-text opacity-0 group-hover:opacity-100"
       />
 
       {isHighRisk && (
@@ -116,8 +116,6 @@ const SynapseNode = memo(({ data, selected }: SynapseNodeProps) => {
           )}
         </div>
       </div>
-
-      <div className="relative z-10 mt-2 h-px w-full bg-gradient-to-r from-transparent via-white/8 to-transparent" />
     </motion.div>
   );
 });
